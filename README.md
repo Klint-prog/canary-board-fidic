@@ -18,7 +18,7 @@ Este projeto implementa uma **empresa de gestão de investimentos autônoma** us
 3. 📊 **Gera recomendações** baseadas em análise de risco e retorno
 4. 🤖 **Delega tarefas** entre agentes especializados (CEO → CTO → Analistas)
 
-Foi construído como resposta ao desafio de [Luis Felipe Amaral](https://www.linkedin.com/in/lfamaral/) (CEO/CIO da Drýs Capital) para construção de sistemas com AI agents.
+Foi construído como resposta ao desafio de [Luis Felipe Amaral](https://www.linkedin.com/in/luis-felipe-amaral/) (CEO/CIO da Drýs Capital) para construção de sistemas com AI agents.
 
 ---
 
@@ -158,7 +158,7 @@ Um **CRM AI-native para gestores de investimentos** que:
 
 **Jhonatas Mendes**
 - GitHub: [@Klint-prog](https://github.com/Klint-prog)
-- Projeto construído com curiosidade, Docker, e muita quebra de cabeça 🔧
+- Projeto construído com profissionalismo, Docker Compose, e muita trabalho para implementar algo ainda unico 🔧
 
 ---
 
