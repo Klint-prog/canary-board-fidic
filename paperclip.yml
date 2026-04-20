@@ -1,0 +1,72 @@
+services:
+
+  # ── Banco de dados ─────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:17-alpine
+    container_name: paperclip-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: paperclip
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-paperclip}
+      POSTGRES_DB: paperclip
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paperclip -d paperclip"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Aplicação ──────────────────────────────────────────────────────────────
+  paperclip:
+    image: ghcr.io/paperclipai/paperclip:latest
+    container_name: paperclip
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${PAPERCLIP_PORT:-3100}:3100"
+    environment:
+      # Rede
+      HOST: "0.0.0.0"
+      PORT: "3100"
+
+      # Dados
+      PAPERCLIP_HOME: /paperclip
+
+      # Banco externo
+      DATABASE_URL: "postgres://paperclip:${POSTGRES_PASSWORD:-paperclip}@postgres:5432/paperclip"
+
+      # Modo authenticated+private: permite bind 0.0.0.0 sem expor na internet
+      # (local_trusted não funciona em Docker pois exige loopback)
+      PAPERCLIP_DEPLOYMENT_MODE: "authenticated"
+      PAPERCLIP_DEPLOYMENT_EXPOSURE: "private"
+
+      # Segredo obrigatório no modo authenticated (mude para algo aleatório)
+      BETTER_AUTH_SECRET: "${BETTER_AUTH_SECRET:-mude-este-segredo-32-chars-min}"
+
+      # OpenRouter como provedor de LLM (compatível com adapter codex_local)
+      OPENAI_API_KEY: "${OPENAI_API_KEY}"
+      OPENAI_BASE_URL: "https://openrouter.ai/api/v1"
+
+      # Chaves opcionais para outros adapters
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+
+    volumes:
+      # Volume nomeado — Docker gerencia permissões, sem conflito de UID
+      - paperclip_data:/paperclip
+
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3100/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgres_data:
+  paperclip_data:
+
+entrypoint: >
+  sh -c "chmod -R 777 /paperclip && exec node /app/server/dist/index.js"
