@@ -1,7 +1,12 @@
+**Imagem Dashboard Geral**
 
 <img width="1910" height="1008" alt="image" src="https://github.com/user-attachments/assets/3eaada3d-af72-4709-8f68-9feca48f71f2" />
 
-![Uploading image.png…]()
+
+**Imagem perfil do CEO Agêntico**
+
+<img width="1910" height="1008" alt="image" src="https://github.com/user-attachments/assets/6b1a0770-4069-49b1-9cec-a7c9ab8a7f3e" />
+
 
 
 # 🐦 Canary Board FIDIC — AI Investment Management System
