@@ -1,3 +1,9 @@
+
+<img width="1910" height="1008" alt="image" src="https://github.com/user-attachments/assets/3eaada3d-af72-4709-8f68-9feca48f71f2" />
+
+![Uploading image.png…]()
+
+
 # 🐦 Canary Board FIDIC — AI Investment Management System
 
 > Sistema autônomo de gestão de investimentos em ações brasileiras (B3) e criptoativos, orquestrado por agentes de IA via [Paperclip](https://paperclip.ing).
